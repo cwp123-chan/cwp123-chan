@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>AJAX</title>
+  </head>
+  <body>
+    <h1>AJAX</h1>
+    <hr>
+
+    <h2>认识AJAX</h2>
+    <p>AJAX : Asynchronous JavaScript and XML（异步的 JavaScript 和 XML）</p>
+    <p>AJAX在不重新加载整个页面的情况下，与服务器交换数据并更新部分网页</p>
+    <p>XML 指可扩展标记语言 XML 被设计用来传输和存储数据</p>
+
+
+    <button type="button" name="button" id="but">AJAX</button>
+
+    <script type="text/javascript">
+
+      // response.addHeader(‘Access-Control-Allow-Origin:*’);
+        //获取按钮
+        var but = document.getElementById('but');
+
+        but.onclick = function() {
+          var msg = '我是来自js的值';
+            //XMLHttpRequest对象 用于在后台与服务器交换数据
+            //1.创建对象
+            var xhr = new XMLHttpRequest();
+
+            //4.接收响应
+            // onreadystatechange 事件
+            //当 readyState 改变时，就会触发 onreadystatechange 事件
+            // readyState 存有 XMLHttpRequest 的状态。从 0 到 4 发生变化
+            // 0: 请求未初始化
+            // 1: 服务器连接已建立
+            // 2: 请求已接收
+            // 3: 请求处理中
+            // 4: 请求已完成，且响应已就绪
+            xhr.onreadystatechange = function(){
+              if (xhr.readyState == 4) {
+                  if (xhr.status == 200) {
+                      // status  返回服务器的响应状态码
+                      // 200  成功响应
+                      // 404  文件不存在
+                      // 304  文件来自缓存
+                      // 500  服务器未知错误
+                      // 503  服务器宕机 服务暂时不可用
+
+                      // 处理响应信息
+                      //responseText 获取服务器的响应文本
+                      // alert(xhr.responseText);
+
+                      msg = xhr.responseText;
+
+                      console.log(msg);
+
+                  }
+              }
+            }
+
+            //2.请求初始化
+            //参1 method  POST/GET/HEAD
+            //参2 url
+            // 参3 是否同/异步,默认true(异步的)/false(同步的)
+            xhr.open('get', './php/a.php?a=2', false);
+
+            //3.发送请求
+            xhr.send();
+
+            alert(msg);
+
+
+            //post 方式
+            // xhr.open('post','./php/b.php',true);
+            // 设置POST请求头信息 post的数据是使用url编码的，所谓url编码，就是遇到特殊字符用%XX的方式转义。
+            // xhr.setRequestHeader('content-type','application/x-www-form-urlencoded');
+            // xhr.send('a=2b&b=3a');
+
+        //     var xhr = new XMLHttpRequest();
+        //     xhr.onreadystatechange = function(){
+        //         if (xhr.readyState == 4) {
+        //             if (xhr.status == 200) {
+        //                 // var obj = JSON.parse(xhr.responseText);
+        //                 alert(xhr.responseText);
+        //                 // for (var i in obj) {
+        //                     // box.innerHTML +=  i + ' : ' + obj[i] + '<br>';
+        //                 // }
+        //             }
+        //         }
+        //     }
+        //     xhr.open('get', 'http://127.0.0.1/AJAX/php/a.php', true);
+        //     xhr.send();
+        }
+    </script>
+
+
+
+    <!-- <script src="./jquery.min.js"></script>
+    <script type="text/javascript">
+    $('#but').click(function(){
+      $.ajax({
+        url : './php/a.php?a=2',
+        method : 'GET',
+        //JSON 是存储和交换文本信息的语法.类似 XML JSON 比 XML 更小、更快，更易解析
+        dataType : 'json',
+        success : function(data){
+          alert(data);
+        },
+        error : function(){
+          alert('AJAX执行失败');
+        }
+      });
+
+
+      // $.ajax({
+      //   url : './php/b.php',
+      //   method : 'POST',
+      //   data : {a:'2b',b:'3a'},
+      //   dataType : 'json',
+      //   success : function(data){
+      //     alert(data);
+      //   },
+      //   error : function () {
+      //     alert('AJAX执行失败');
+      //   }
+      // });
+    })
+    </script> -->
+
+  </body>
+</html>

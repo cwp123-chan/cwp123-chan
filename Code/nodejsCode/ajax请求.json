@@ -1,0 +1,16 @@
+$.ajax({
+        type:"GET",
+        url:"service.php?number="+$("#keyword").val(),
+        dataType:"json", 预期服务器返回数据的类型
+        success:function(data){
+           if(data.success){
+               $("searchResult").html(data.msg);
+           }else{
+               $("#searchResult").html("出现错误：" + data.msg);
+           }
+        },
+        error:function(jqXHR){
+           aler("发生错误："+ jqXHR.status);
+        }
+});
+

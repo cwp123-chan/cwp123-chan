@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<style>
+		body{
+			background: url("./view/images/1.jpg") no-repeat 0 0/100%;
+
+		}
+        li{
+             list-style: none;
+             padding-top:10px;
+        }
+		.box2{
+			width:520px;
+			height:400px;
+			border:1px solid #e8e8e8;
+            margin:160px auto;
+		}
+        .box3{
+              /*margin-top:60px;*/
+              margin-left:180px;
+        }
+        .in{
+                width:300px;
+                height:30px;
+                padding-left:15px;
+        }
+        .pu{
+            margin-left:80px;
+
+            width:100px;
+        }
+	</style>
+    <title>Document</title>
+</head>
+<body>
+
+
+    <div>
+        <div class="box2">
+        <div class="box3"><h1>欢迎注册</h1></div>
+            <form action="/page/dolog.html" method="post" enctype="multipart/form-data">
+            <ul>
+                <li>用户名：<input type="text" name = "name2" class="in"></li>
+                <li>密 <span> &nbsp;&nbsp;&nbsp;</span>码：<input type="password" name = "pwd2" class="in" ></li>
+                <li>选择头像:<input type="file" class = 'box' name="myfile"  value="头像"></li>
+                <li><input type="submit" value="注册" id="isok" class="pu">
+                <input type="reset" value="重置" class="pu"></li>
+            </ul>
+
+
+
+            </form>
+        </div>
+    </div>
+    <script>
+        var isok = document.getElementById('isok');
+        isok.onckick = function(){
+            alert('注册成功！')；
+        }
+    </script>
+</body>
+</html>

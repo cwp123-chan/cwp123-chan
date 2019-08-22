@@ -1,0 +1,50 @@
+<h1 id="git的安装与使用">Git的安装与使用</h1>
+
+<p>​																																		更新于：2019年7月18日</p>
+
+<h2 id="1git的安装">1.Git的安装</h2>
+
+<p>##</p>
+
+<ul>
+  <li>
+    <h3 id="进入ubuntu命令行界面输入">进入Ubuntu命令行界面输入：</h3>
+
+    <pre><code>sudo su - 	
+apt-get install git
+</code></pre>
+  </li>
+</ul>
+
+<h2 id="2git的使用">2.Git的使用</h2>
+
+<ul>
+  <li>
+    <h3 id="基本命令操作">基本命令操作</h3>
+
+    <pre><code>git clone https：//github.com/username/username.github.io	#获取远程版本库
+git branch -all
+git branch -A 		#获取所有分支
+git branch &lt;mastername&gt;	#创建分支
+git checkout &lt;库名&gt; &lt;分支名&gt;：&lt;主分支下分支&gt;		#切换分支名
+版本回退
+git reset --hard HEAD^		#表示退回到上一个版本
+git chackout -- &lt;文件名&gt;	#退回上一个区
+比较版本
+git diff &lt;文件名&gt;			#比较缓存区与工作去文件区别
+远程库
+git status 				  #查看状态
+git add .				  #从工作区添加到缓存区
+git commit -m “注释”		#提交缓存区
+git push &lt;orgin&gt; &lt;master&gt; #上传到远程库
+git pull --rebase &lt;orgin&gt; &lt;master&gt; #合并分支
+git log 				  #查看日志
+git reflog				  #查看每一次命令记录历史
+git merge &lt;margename&gt;	  #合并分支到主分支下
+用户
+git config --global user.name "myname"	更改个人用户名
+git config --global user.email"myemail" 更改个人邮箱
+</code></pre>
+  </li>
+</ul>
+

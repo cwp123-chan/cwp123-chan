@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>聊天室</title>
+	<style type="text/css">
+		body{
+			background-color:#747474;
+
+		}
+		.box{
+			border:1px solid;
+			width:400px;
+			height:700px;
+			margin:100px auto;  
+			background-color:rgb(255,250,240);
+			position:relative;
+		}
+		.box2{
+			width:266px;
+			height:50px;
+			background-color:black;
+			color:white;
+			padding-left:134px;
+			padding-top:10px;
+		}
+		.box3{
+			float:left;
+			width:400px;
+			height:40px;
+			position:absolute;
+			bottom:10px;
+			/*top:537px;*/
+			left:18px;
+
+		}
+		input{
+			width:310px;
+			height:20px;
+		}
+		.list-group{
+			/*border:1px solid;*/
+			max-height: 300px;
+			overflow: hidden;
+		}
+
+	</style>
+</head>
+<body id="bd">
+	<div class="box">
+		<div class="box2">
+			欢迎<small id="ip"><%=ip%></small>贵宾
+		</div>
+		<ul class="list-group">
+			<li class="list-group-item">还没有人发言...</li>
+		</ul>
+		<div class="box3">
+			<input type="text" id = "msg">
+			<button id="btn">发送</button>
+			
+		</div>
+	</div>
+	<script src="/socket.io/socket.io.js"></script>
+	<script src="/js/jquery.min.js"></script>
+	<script type="text/javascript">
+		// 得到 socket对象
+		var socket = io();
+		var name = prompt('请输入用户名');
+		console.log(name);
+		socket.emit('news',name);
+		$('#btn').click(function(){
+			// console.log(ip.html());
+			// 将文本框内容发送到服务器
+			socket.emit('clientOut',{
+				name:name,
+				msg:$('#msg').val(),
+				ip:$('#ip').html()
+			});
+			$('#msg').val("");
+		});
+
+
+		// 接受服务器发来的消息
+		socket.on('serverOut',function(serverMsg){
+			console.log(serverMsg);
+			var html = '<li class="list-group-item text-primary"><b>'+name+'</b> : '+serverMsg.msg+'</li>';
+			// 最前插入最新消息
+			$(".list-group").prepend(html);
+		})
+
+		// 接受服务器发来的ip
+		socket.on('newsOut',function(name){
+			// console.log(name);
+			var html = '<li class="list-group-item text-primary"><b>'+name+'</b> : '+'加入了房间'+'</li>';
+			// 最前插入最新消息
+			$(".list-group").prepend(html);
+
+		})
+
+
+
+
+
+
+	</script>
+
+</body>
+</html>

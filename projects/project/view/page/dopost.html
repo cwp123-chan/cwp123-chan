@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+
+    <script type="text/javascript" src="../js/login.js"></script>
+    <script type="text/javascript" src="../js/Test.js"> </script>
+    <script type="text/javascript" src="../js/jquery-3.4.1.js"> </script>
+
+    <style>
+        ul li{
+            list-style:none;
+        }
+        .max{
+            width:300px;
+            height:200px;
+            /*border: 1px solid;*/
+            margin:300px auto;
+            padding-top:10px;
+        }
+        .box{
+            margin-top: 10px;
+        }
+        #login{
+            margin-left: 30px;
+        }
+        #logout{
+            margin-left: 30px;
+
+        }
+    </style>
+</head>
+<body>
+<form action= "/page/dopost.html" method="post" enctype="multipart/form-data">
+    <ul class="max">
+        <li>账号<input type="text" name="massage" placeholder="" class = 'box'></li>
+        <li>密码<input type="text" name="pwd" placeholder="" class = 'box'></li>
+        <li>选择头像<input type="file" class = 'box' name="myfile"></li>
+
+        <li>
+            <input type="submit" value="登上" id="login" class = 'box'>
+            <button id= "logout" class = 'box' > 注册</button>
+        </li>
+    </ul>
+</form>
+
+
+</body>
+</html>

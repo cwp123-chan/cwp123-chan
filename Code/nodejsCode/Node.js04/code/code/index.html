@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style type="text/css"></style>
+</head>
+<body>
+<h1>我是index页面,我引用的一个script文件</h1>
+<hr>
+
+<button id="btn">提问</button>
+
+<script src="/socket.io/socket.io.js"></script>
+<script>
+    var socket = io();
+    // 点击按钮 发出问题
+    document.getElementById('btn').onclick = function(){
+        // 发送
+        socket.emit('tiwen', '你今年多大了');
+
+        // 监听服务器的回答
+        socket.on('huida',function (msg){
+            alert('服务器说:' + msg);
+        });
+    }
+
+</script>
+</body>
+</html>

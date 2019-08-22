@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>聊天室</title>
+	<style type="text/css">
+		body{
+			/*background:url('https://img.ivsky.com/img/tupian/pre/201611/20/shouna_kongbai_mingpian-019.jpg') ;*/
+			background-color:rgb(247,238,214);
+			background-size:1650px 950px;
+
+		}
+		li{
+			list-style:none;
+		}
+		.box{
+			/*border:1px solid;*/
+			width:300px;
+			height:600px;
+			margin-top:-29px;
+			margin-left:600px;  
+			/*background-color:rgb(255,250,240);*/
+			position:relative;
+			/*transform: rotate(-5deg);*/
+		}
+		.box2{
+			width:210px;
+			height:50px;
+			background-color:#F1C40F;
+			font-size:30px;
+			font-weight: bold;
+			color:white;
+			padding-left:151px;
+			padding-top:0px;
+
+		}
+		.box3{
+			float:left;
+			width:928px;
+			height:40px;
+			position:absolute;
+			bottom:10px;
+			top:712px;
+			left:-500px;
+
+			/*transform: rotate(5deg);*/
+
+
+		}
+		li{
+			font-size:18px;
+		}
+		input{
+			width:1050px;
+			height:40px; 
+			padding-left:30px;
+			font-size:24px;
+			margin-top:-160px;
+			margin-left:100px;
+		}
+		.list-group{
+			/*border:1px solid;*/
+			max-height: 300px;
+			overflow: hidden;
+		}
+		#btn{
+			width:60px;
+			height:40px;
+			outline:none;
+			list-style: none;
+		}
+		.box4{
+			width:300px;
+			height:150px;
+			background-color:rgb(255,250,240);
+			font-size:30px;
+			position:absolute;
+			top:100px;
+			left:-10px;
+			padding-top:48px;
+			padding-left:90px;
+			/*border: 1px solid;*/
+			display:none;
+		}
+		#nok{
+			margin-left:40px;
+			width:51px;
+		}
+		#ye{
+			margin-left:20px;
+			width:51px;
+
+		}
+
+		.uls{
+			border:1px solid;
+			width:185px;
+			height:40px;
+			padding-left:61px;
+			font-size:20px;
+			color:white;
+			font-weight: bold;
+			position: relative;
+			top:-677px;
+			margin-left:1100px;
+		}
+		.room{
+			/*border:1px solid white;*/
+		
+
+			width:250px;
+			/*height:550px;*/
+
+			position:relative;			
+			margin-left:200px;
+			top:-33px;
+		}
+		.fre{
+			position: relative;
+			top:-660px;
+			margin-left:1135px;
+		}
+		.fj{
+			margin-left:283px;
+			position: relative;
+			top:-17px;
+		}
+		.sele{
+			
+
+
+
+
+		}
+		.rooms{
+			float:left;
+		}
+		.room1{
+			width:50px;
+			height:42px;
+
+			position:relative;			
+			margin-left:0px;
+			top:-33px;
+		}
+		.opt{
+			/*height:42px;*/
+			border:1px solid green;
+			width:110px;
+			height:40px;
+			font-weight: bold;
+			background-color:rgb(255,250,240);
+			font-size:20px;
+			padding-left:61px;
+			padding-top:11px;
+		}
+		.opt:hover{
+			cursor:pointer;
+		}
+
+		#ip{
+			margin-left:-150px;
+		}
+
+
+	</style>
+</head>
+<body id="bd">
+	<div class="box">
+		
+		<div class="box2"  style="text-align:center"　>
+			<p  style="text-align:center"  id="ip" font-size="30">这里是群聊室</p>
+		</div>
+		<ul class="list-group" id="list">
+			<li class="list-group-item" id="fayan">还没有人发言...</li>
+		</ul>
+		<div class="box3" >
+			<input type="text" id = "msg" placeholder="按回车发送消息">
+		</div>
+		
+		<div class="box4" id="box4">
+			<span>是否添加好友？</span>
+			<form action="http://192.168.28.71:4000">
+			<input type="hidden" name="b" value="" id="bip">
+			<input type="hidden" name="mark" value="" id = "mark">
+			<button id="ye">是</button>
+			<button id="nok">否</button>
+			</form>
+		</div>
+	</div>
+				<h2 font-color="white" class="fre">好友列表</h2>
+	<select class="uls ul" >
+		</select>
+	<script src="/socket.io/socket.io.js"></script>
+	<script src="/js/jquery.min.js"></script>
+	<script type="text/javascript">
+
+			
+			var box4 = document.getElementById('box4');
+		
+		// 得到 socket对象
+		var socket = io();
+		// var name = prompt('请输入用户名');
+		socket.emit('news',name);
+		$('#btn').click(function(){
+			// console.log(ip.html());
+			// 将文本框内容发送到服务器
+			// console.log(name);
+
+			socket.emit('clientOut',{
+				name:name,
+				msg:$('#msg').val(),
+				ip:$('#ip').html()
+			});
+			$('#msg').val("");
+		});
+
+
+		var nameuser = '';
+		// 接受服务器发来的ip
+		socket.on('newsOut',function(name){
+			nameuser = name;
+			var html = '<li class="list-group-item text-primary" id="hidd" style="display:none;"><b>'+nameuser+'</b> : '+'加入了房间'+'</li>';
+			alert(nameuser + '加入了房间');
+			// var html = ''
+			// 最前插入最新消息
+			$(".list-group").prepend(html);
+		})
+
+		// enter 发送
+		    // 回车发送消息
+		    $('#msg').keydown(function(e){
+		    	if(e.keyCode == 13){
+			        if(msg.value==''){
+			    		alert('不允许发送空文本！');
+			    	}
+					console.log('发送人'+nameuser);
+					
+		            // 把文本框的内容发送到服务器
+		            socket.emit("clientOut",{
+		            	"nameusers":nameuser,
+		                "msg" : $("#msg").val(),
+		                "ip" : $("#ip").html()
+		            });
+		            $('#msg').val("");
+		
+		        }
+		    });
+
+		// 接受服务器发来的消息
+		socket.on('serverOut',function(serverMsg){
+			console.log("前台是："+serverMsg['nameusers']);
+			fayan.style.display = "none";
+
+			var html = '<li class="list-group-item text-primary"><b>'+serverMsg['nameusers']+'</b> : '+serverMsg.msg+'</li>';
+			// 最前插入最新消息
+			$(".list-group").prepend(html);
+		})
+
+		// 接受离开房间的消息
+		socket.on('outOut',function(outOut){
+			console.log(outOut);
+			alert(outOut);
+		})
+
+
+
+		list.addEventListener('click',function(e){
+			box4.style.display = "block";
+			nickname = e.target.innerHTML;
+
+            console.log(e.target.innerHTML);
+        })
+		ye.onclick = function ye(){
+			if(nickname==a.value){
+				alert('不能重复添加');
+				box4.style.display = "none";
+
+				return false;
+			}else{
+				bip.value = nickname;
+				mark.value = 1;
+			// return false;
+			alert("添加成功");
+			// history.go(-3);
+			console.log('同意：'+ nickname);
+
+			}
+			
+		}
+		nok.onclick = function noy(){
+			box4.style.display = "none";
+
+			return false;
+		}
+		create.onclick = function(){
+			var roomnub = prompt('请输入房间号');
+			room.value = roomnub;
+			console.log(roomnub);
+		}
+
+		roomsid.addEventListener('click',function(e){
+
+				romark.value = e.target.innerHTML;
+				e.target.style.backgroundColor = "yellow";
+				e.target.style.color = "red";
+				e.target.style.borderColor = "white";
+				console.log(e.target);
+				// return false;
+		},false)
+		
+		
+
+
+	</script>
+
+</body>
+</html>
+
+

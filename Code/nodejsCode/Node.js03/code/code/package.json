@@ -1,0 +1,16 @@
+{
+  "name": "code",
+  "version": "1.0.0",
+  "description": "Test NPM",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "s86",
+  "license": "ISC",
+  "dependencies": {
+    "formidable": "^1.2.1",
+    "random-int": "^2.0.0",
+    "time-stamp": "^2.2.0"
+  }
+}
